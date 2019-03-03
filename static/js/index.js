@@ -1,24 +1,20 @@
 window.onload = init;
 
-//list of locations
-//street name, street number, longitude, longitude, price, info
-var locations = [
-	["St Asaph Street", "370", "-43.536389" , "172.643700", "5.00", "Parking Times from 7am to 9pm"],
-	["Allen Street", "17","-43.537889" , "172.641032", "3.00", "Parking Times from 7am to 9pm"],
-	["Southward Street", "7","-43.537235" , "172.641844", "3.50", "Parking Times from 7am to 9pm"],
-	["Manchester Street", "79","-43.536657" , "172.639645", "2.00", "Parking Times from 7am to 9pm"],
-	["Pilgrim Place", "13","-43.540601" , "172.641611", "6.00", "Parking Times from 7am to 9pm"],
-	["Rope Street", "10","-43.538365" , "172.641404", "10.00", "Parking Times from 7am to 9pm"],
-	["Lichfield Street", "165","-43.538365" , "172.641404", "8.00", "Parking Times from 7am to 9pm"],
-	["Barbadoes Street", "182","-43.535794" , "172.645701", "0.00", "Parking Times from 7am to 9pm"],
-	["Madras Street", "140","-43.538093", "172.642717", "4.50", "Parking Times from 6.30am to 10.30pm"]
-]
+var locations = [];
 var the_map;
 var infowindow;
 var parkicon = 'https://maps.google.com/mapfiles/kml/shapes/parking_lot_maps.png';
 var parkselected = false;
 
+
 function init(){
+	//parse the locations from the django database
+	locations_parse = locations_parse.slice(10).split("Location: ").slice(1)
+	for (i = 0; i < locations_parse.length; i++){
+		locations_parse[i] = locations_parse[i].split(",");
+	}
+	locations = locations_parse;
+	
 	initMap();
 	document.getElementById("search").onclick = search;
 	document.getElementById("findparking").onclick = search;

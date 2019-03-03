@@ -2,27 +2,49 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<title>ParkaFreebia</title>
+		{% block title %}<title>ParkaFreebia</title>{% endblock %}
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" type="text/css" media="screen" href="{%static 'css/style.css' %}">
+		
+		<script type="text/javascript">
+			locations_parse = (("{{locations|escape}}").replace(/&(l|g|quo)t;/g, function(a,b){
+                return {
+                    l   : '',
+                    g   : '',
+                    quo : '"'
+                }[b];
+            }));
+        </script>
 		<script src="{%static 'js/index.js' %}"></script>
+		
 		<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVMiezf_to3MWjuQt6U6lacjpeh1ohDpg&callback=initMap"></script>
 	</head>
 	<body>
 		<div id="uicontainer">
+		
 			<div id="searchdiv">
+			
 				<input type="text" name="searchbar" id="searchbar" placeholder="Search for Address Name (eg. Manchester Street)">
 				<input type="button" value="Search" id="search">
 			</div>
 			<div id ="map">
 			</div>
 			<div id="sidebar">
+				{% if user.is_authenticated %}
+				 <p>User: {{ user.get_username }}</p>
+				 <p><a href="{% url 'logout'%}?next={{request.path}}">Logout</a></p>   
+			   {% else %}
+				 <p><a href="{% url 'login'%}?next={{request.path}}">Login</a></p>   
+			   {% endif %} 
 				<input type="button" value="Find Parking" id="findparking">
 				<input type="button" value="Find Driver" id="finddriver">
 				<h1 id="streetname"></h1>
 				<h2 id="price"></h2>
 				<h3 id="description"></h3>
+				{% block content %}
+				
+				{% endblock %}
 			</div>
 
 		</div>

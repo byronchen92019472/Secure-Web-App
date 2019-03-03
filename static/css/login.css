@@ -9,6 +9,10 @@ body {
 }
 /*login page*/
 
+section.tr{
+	
+}
+
 section.login {
 	margin: auto; 
 	width: 400px;
@@ -27,6 +31,7 @@ section.login input{
 	border: 1px solid;
 	padding: 8px;
 }
+
 
 section.login input:focus{ 
 	border: 1px solid #0000FF;

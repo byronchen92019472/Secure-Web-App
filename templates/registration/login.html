@@ -1,40 +1,57 @@
-{% extends "base.html" %}
+{% load static %}
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Login Page</title>
+<link rel="stylesheet" type="text/css" media="screen" href="{%static 'css/login.css' %}">
+</head>
+	<body>
+		<section class="login">
+			<img src="{%static 'images/logo.gif' %}" alt="logo" width="208.5" height="216">
+			<h1>ParkaFreebia</h1>
+			
+			{% block content %}
 
-{% block content %}
+			{% if form.errors %}
+			  <p>Your username and password didn't match. Please try again.</p>
+			{% endif %}
 
-{% if form.errors %}
-  <p>Your username and password didn't match. Please try again.</p>
-{% endif %}
+			{% if next %}
+			  {% if user.is_authenticated %}
+				<p>Your account doesn't have access to this page. To proceed,
+				please login with an account that has access.</p>
+			  {% else %}
+				<p>Please login to see this page.</p>
+			  {% endif %}
+			{% endif %}
 
-{% if next %}
-  {% if user.is_authenticated %}
-    <p>Your account doesn't have access to this page. To proceed,
-    please login with an account that has access.</p>
-  {% else %}
-    <p>Please login to see this page.</p>
-  {% endif %}
-{% endif %}
+			<form method="post" action="{% url 'login' %}">
+			{% csrf_token %}
+			<table>
 
-<form method="post" action="{% url 'login' %}">
-{% csrf_token %}
-<table>
+			<tr>
+			  <td color="FFF">{{ form.username.label_tag }}</td>
+			  <td>{{ form.username }}</td>
+			</tr>
 
-<tr>
-  <td>{{ form.username.label_tag }}</td>
-  <td>{{ form.username }}</td>
-</tr>
+			<tr>
+			  <td>{{ form.password.label_tag }}</td>
+			  <td>{{ form.password }}</td>
+			</tr>
+			</table>
 
-<tr>
-  <td>{{ form.password.label_tag }}</td>
-  <td>{{ form.password }}</td>
-</tr>
-</table>
+			<input type="submit" name="submit" id="submit" value="login" />
+			<input type="hidden" name="next" value="{{ next }}" />
+			</form>
 
-<input type="submit" value="login" />
-<input type="hidden" name="next" value="{{ next }}" />
-</form>
+			{# Assumes you setup the password_reset view in your URLconf #}
+			<p><a href="{% url 'password_reset' %}">Lost password?</a></p>
 
-{# Assumes you setup the password_reset view in your URLconf #}
-<p><a href="{% url 'password_reset' %}">Lost password?</a></p>
+			{% endblock %}
 
-{% endblock %}
+		</section>
+
+	</body>
+</html>
