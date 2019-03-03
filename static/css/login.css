@@ -1,0 +1,47 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,300i,700,700i');
+
+body {
+	font-family: 'Open Sans', sans-serif; 
+	font-size: 16px; 
+	font-weight: 300; 
+	color: #555; 
+	background-color: rgb(202, 235, 242);
+}
+/*login page*/
+
+section.login {
+	margin: auto; 
+	width: 400px;
+	border: 2px solid;
+	border-radius:5px;
+	text-align:center;
+	background-color: #FFF
+}
+
+section.login input{
+	margin-bottom: 1em;
+	width: 70%;
+	padding:.2em .5em;
+	margin: 8px 0;
+	box-sizing: border-box;
+	border: 1px solid;
+	padding: 8px;
+}
+
+section.login input:focus{ 
+	border: 1px solid #0000FF;
+}
+
+section.login button{
+	background-color:rgb(202, 235, 242);
+	border-style:solid;
+	border-width: 1px;
+	border-color:grey;
+	box-shadow: 0 2px 4px rgba(0,0,0,0.12), 0 2px 3px rgba(0,0,0,0.24);
+	padding:10px 20px;
+	text-decoration: none;
+	margin: 10px 35px 10px 35px;
+	cursor:pointer;
+	font-family: 'Open Sans', sans-serif; 
+	font-weight:bold;
+}

@@ -1,0 +1,30 @@
+{% load static %}
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>ParkaFreebia</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" type="text/css" media="screen" href="{%static 'css/style.css' %}">
+		<script src="{%static 'js/index.js' %}"></script>
+		<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVMiezf_to3MWjuQt6U6lacjpeh1ohDpg&callback=initMap"></script>
+	</head>
+	<body>
+		<div id="uicontainer">
+			<div id="searchdiv">
+				<input type="text" name="searchbar" id="searchbar" placeholder="Search for Address Name (eg. Manchester Street)">
+				<input type="button" value="Search" id="search">
+			</div>
+			<div id ="map">
+			</div>
+			<div id="sidebar">
+				<input type="button" value="Find Parking" id="findparking">
+				<input type="button" value="Find Driver" id="finddriver">
+				<h1 id="streetname"></h1>
+				<h2 id="price"></h2>
+				<h3 id="description"></h3>
+			</div>
+
+		</div>
+	</body>
+</html>
