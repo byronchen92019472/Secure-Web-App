@@ -22,7 +22,7 @@ class Driver(models.Model):
 	
     def __str__(self):
         """String for representing the Model object."""
-        return self.first_name + " " + self.last_name
+        return self.first_name + " " + self.last_name + "," + self.mobile_phone;
 	
 class ParkingRequest(models.Model):
     location = models.ForeignKey(Location, on_delete=models.SET_NULL, null=True)

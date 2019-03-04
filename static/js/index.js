@@ -5,6 +5,7 @@ var the_map;
 var infowindow;
 var parkicon = 'https://maps.google.com/mapfiles/kml/shapes/parking_lot_maps.png';
 var parkselected = false;
+var drivers = [];
 
 
 function init(){
@@ -14,6 +15,13 @@ function init(){
 		locations_parse[i] = locations_parse[i].split(",");
 	}
 	locations = locations_parse;
+	//parse all drivers from django database
+	drivers_parse = drivers_parse.slice(10).split("Driver: ").slice(1)
+	for (i = 0; i < drivers_parse.length; i++){
+		drivers_parse[i] = drivers_parse[i].split(",");
+	}
+	drivers_parse[drivers_parse.length-1][1] = drivers_parse[drivers_parse.length-1][1].slice(0, 9);
+	drivers = drivers_parse;
 	
 	initMap();
 	document.getElementById("search").onclick = search;
@@ -108,7 +116,11 @@ function finddriver(){
 	//function to give info to contact driver
 	if (parkselected){
 		document.getElementById("price").innerHTML="";
-		document.getElementById("description").innerHTML="Name: Driver Name</br>Phone: 022155432";
+		document.getElementById("description").innerHTML="";
+		for (i = 0; i < drivers.length; i++){
+			document.getElementById("description").innerHTML+="</br>Name: " 
+			+ drivers[i][0] + "</br>Phone: " + drivers[i][1] + "</br>";
+		}
 	}
 
 }

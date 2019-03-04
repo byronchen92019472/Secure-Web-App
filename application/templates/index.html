@@ -8,13 +8,8 @@
 		<link rel="stylesheet" type="text/css" media="screen" href="{%static 'css/style.css' %}">
 		
 		<script type="text/javascript">
-			locations_parse = (("{{locations|escape}}").replace(/&(l|g|quo)t;/g, function(a,b){
-                return {
-                    l   : '',
-                    g   : '',
-                    quo : '"'
-                }[b];
-            }));
+			locations_parse = (("{{locations|escape}}").replace(/&(l|g|quo)t;/g, ''));
+			drivers_parse = (("{{drivers|escape}}").replace(/&(l|g|quo)t;/g, ''));
         </script>
 		<script src="{%static 'js/index.js' %}"></script>
 		
